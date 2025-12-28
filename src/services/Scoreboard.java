@@ -16,8 +16,14 @@ public class Scoreboard {
 
         Comparator<Match> comp = new Comparator<Match>() {
             public int compare(Match a, Match b) {
-                if ((a.getHomeScore() * a.getAwayScore()) > (b.getHomeScore() * b.getAwayScore())) {
+                if (a.getTotalGoals() > b.getTotalGoals()) {
                     return -1;
+                } else if (a.getTotalGoals() == b.getTotalGoals()) {
+                    if (a.getStartTime().isAfter(b.getStartTime())) {
+                        return -1;
+                    } else {
+                        return 1;
+                    }
                 } else {
                     return 1;
                 }

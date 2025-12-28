@@ -44,6 +44,9 @@ public class Match {
     public Status getStatus() {
         return this.status;
     }
+    public int getTotalGoals() {
+        return this.homeScore * this.awayScore;
+    }
 
     // Setters
     public void setId(int id) {
