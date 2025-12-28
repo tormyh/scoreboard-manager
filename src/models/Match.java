@@ -35,7 +35,7 @@ public class Match {
     public String getAwayTeam() {
         return this.awayTeam;
     }
-    public int awayScore() {
+    public int getAwayScore() {
         return this.awayScore;
     }
     public LocalDateTime getStartTime() {
@@ -61,6 +61,7 @@ public class Match {
     public void setStatus(Status status) {
         this.status = status;
     }
+
 
     @Override
     public String toString() {

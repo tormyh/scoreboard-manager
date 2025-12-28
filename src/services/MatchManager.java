@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class MatchManager {
-    static ArrayList<Match> inactiveMatches = new ArrayList<Match>();
-    static ArrayList<Match> activeMatches = new ArrayList<Match>();
+    static ArrayList<Match> inactiveMatches = new ArrayList<>();
+    public static ArrayList<Match> activeMatches = new ArrayList<>();
     private static int nextId = 0;
     
     // Start match and add to activeMatches
@@ -38,6 +38,11 @@ public class MatchManager {
             }
         }
         inactiveMatches.add(match);
+    }
+
+    // Return activeMatches
+    public static ArrayList<Match> getActiveMatches() {
+        return activeMatches;
     }
 
     // Print all inactive matches
