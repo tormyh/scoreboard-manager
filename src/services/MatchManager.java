@@ -12,6 +12,13 @@ public class MatchManager {
     
     // Start match, creates match and adds to active matches
     public static Match startMatch(String homeTeam, String awayTeam) {
+        if (homeTeam == null || homeTeam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Home team cannot be null or empty");
+        }
+        if (awayTeam == null || awayTeam.trim().isEmpty()) {
+            throw new IllegalArgumentException("Away team cannot be null or empty");
+        }
+
         Match match = new Match(nextId++, homeTeam, awayTeam, LocalDateTime.now());
         activeMatches.add(match);
         return match;
@@ -30,6 +37,9 @@ public class MatchManager {
     
     // Update match scores
     public static void setHomeAwayScore(int id, int homeGoals, int awayGoals) {
+        if (homeGoals < 0 || awayGoals < 0) {
+            throw new IllegalArgumentException("Goals cannot be negative.");
+        }
         Match match = findMatchById(id);
         match.setHomeScore(homeGoals);
         match.setAwayScore(awayGoals);
