@@ -5,21 +5,19 @@ import java.time.LocalDateTime;
 public class Match {
     private int id;
     private String homeTeam;
-    private int homeScore;
     private String awayTeam;
+    private int homeScore;
     private int awayScore;
     private LocalDateTime startTime;
-    private Status status;
 
     // Constructor
-    public Match(int id, String homeTeam, int homeScore, String awayTeam, int awayScore, LocalDateTime startTime, Status status) {
+    public Match(int id, String homeTeam, String awayTeam, LocalDateTime startTime) {
         this.id = id;
         this.homeTeam = homeTeam;
-        this.homeScore = homeScore;
         this.awayTeam = awayTeam;
-        this.awayScore = awayScore;
+        this.homeScore = 0;
+        this.awayScore = 0;
         this.startTime = startTime;
-        this.status = status;
     }
 
     // Getters
@@ -41,11 +39,8 @@ public class Match {
     public LocalDateTime getStartTime() {
         return this.startTime;
     }
-    public Status getStatus() {
-        return this.status;
-    }
     public int getTotalGoals() {
-        return this.homeScore * this.awayScore;
+        return this.homeScore + this.awayScore;
     }
 
     // Setters
@@ -61,13 +56,9 @@ public class Match {
     public void setStartTime(LocalDateTime startTime) {
         this.startTime = startTime;
     }
-    public void setStatus(Status status) {
-        this.status = status;
-    }
-
 
     @Override
     public String toString() {
-        return id + "|" + homeTeam + "|" + homeScore + "|" + awayTeam + "|" + awayScore + "|" + startTime + "|" + status;
+        return id + "|" + homeTeam + "|" + homeScore + "|" + awayTeam + "|" + awayScore + "|" + startTime;
     }
 }
