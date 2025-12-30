@@ -17,6 +17,12 @@ public class MatchManager {
         return match;
     }
 
+    // End match
+    public static void endMatch(int id) {
+        Match match = findMatchById(id);
+        activeMatches.remove(match);
+    }
+
     // Return activeMatches
     public static List<Match> getActiveMatches() {
         return activeMatches;
