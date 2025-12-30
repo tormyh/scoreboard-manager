@@ -42,14 +42,15 @@ public class Main {
         MatchManager.setHomeAwayScore(3, 2, 2);
         MatchManager.setHomeAwayScore(4, 6, 6);
         MatchManager.setHomeAwayScore(5, 3, 1);
-
-        //List<Match> activeMatches = MatchManager.getActiveMatches();
-        //for (Match match : activeMatches) {
-        //    System.out.println(match);
-        //}
         
         List<Match> scoreboard = Scoreboard.getScoreboard();
         for (Match match : scoreboard) {
+            System.out.println(match);
+        }
+
+        MatchManager.endMatch(9); // Should fail
+        List<Match> activeMatches = MatchManager.getActiveMatches();
+        for (Match match : activeMatches) {
             System.out.println(match);
         }
     }
