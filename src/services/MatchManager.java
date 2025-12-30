@@ -3,59 +3,39 @@ package services;
 import models.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class MatchManager {
-    static ArrayList<Match> inactiveMatches = new ArrayList<>();
-    public static ArrayList<Match> activeMatches = new ArrayList<>();
-    private static int nextId = 0;
+    private final static List<Match> activeMatches = new ArrayList<>();
+    private static int nextId = 1;
     
-    // Start match and add to activeMatches
-    public static boolean startMatch(int id) {
-        Iterator<Match> iterator = inactiveMatches.iterator();
-        while (iterator.hasNext()) {
-            Match match = iterator.next();
-            if (match.getId() == id) {
-                match.setStartTime(LocalDateTime.now());
-                match.setStatus(Status.IN_PROGRESS);
-                activeMatches.add(match);
-                iterator.remove();
-                return true;
-            }
-        }
-        return false;
-    }
-
-    // Add new match to inactiveMatches, and auto increment id
-    public static void createMatch(Match match) {
-        if (match.getId() == 0) {
-            match.setId(nextId);
-            nextId++;
-        } else {
-            if (match.getId() >= nextId) {
-                nextId = match.getId() + 1;
-            }
-        }
-        inactiveMatches.add(match);
+    // Start match, creates match and adds to active matches
+    public static Match startMatch(String homeTeam, String awayTeam) {
+        Match match = new Match(nextId++, homeTeam, awayTeam, LocalDateTime.now());
+        activeMatches.add(match);
+        return match;
     }
 
     // Return activeMatches
-    public static ArrayList<Match> getActiveMatches() {
+    public static List<Match> getActiveMatches() {
         return activeMatches;
     }
-
-    // Print all inactive matches
-    public static void printInactiveMatches() {
-        for (Match match : inactiveMatches) {
-            System.out.println(match);
-        }
+    
+    // Update match scores
+    public static void setHomeAwayScore(int id, int homeGoals, int awayGoals) {
+        Match match = findMatchById(id);
+        match.setHomeScore(homeGoals);
+        match.setAwayScore(awayGoals);
     }
-
-    // Print all active matches
-    public static void printActiveMatches() {
+    
+    // Find match by id
+    private static Match findMatchById(int id) {
         for (Match match : activeMatches) {
-            System.out.println(match);
+            if (match.getId() == id) {
+                return match;
+            }
         }
+        throw new IllegalArgumentException("Match with id " + id + " not found.");
     }
 }
